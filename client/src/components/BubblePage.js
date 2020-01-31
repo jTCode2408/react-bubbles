@@ -10,7 +10,9 @@ const BubblePage = () => {
   // set that data to the colorList state property
 
   return (
+
     <>
+        <h1>WELCOME TO BUBBLE FEST!</h1>
       <ColorList colors={colorList} updateColors={setColorList} />
       <Bubbles colors={colorList} />
     </>
