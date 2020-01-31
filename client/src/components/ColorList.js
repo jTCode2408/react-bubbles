@@ -20,12 +20,19 @@ const {id} =useParams();
   const saveEdit = e => {
     e.preventDefault();
     axiosWithAuth()
-    .put(`http://localhost:5000/api/colors${colors.id}`)
-    .then(res=>{
-      console.log('PUT', res)
-      updateColors(res)
+    .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+    .then((res) => {  
+      console.log(res)      
+      updateColors(colors.map(color =>{
+        if(color.id ===res.data.id){
+          return res.data
+        }
+        return color
+      }));
     })
-    .catch(err=>console.log(err))
+      .catch(err => console.log(err));
+
+
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
@@ -33,7 +40,7 @@ const {id} =useParams();
 
   const deleteColor = color => {
     axiosWithAuth()
-    .delete(`http://localhost:5000/api/colors${colors.id}`)
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
     .then(res =>{
       // console.log('DELTEING', res)
     })
@@ -89,7 +96,7 @@ const {id} =useParams();
             />
           </label>
           <div className="button-row">
-            <button type="submit">save</button>
+            <button type="submit" >save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
