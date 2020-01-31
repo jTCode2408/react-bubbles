@@ -28,7 +28,7 @@ login =e =>{
   axios
   .post('http://localhost:5000/api/login', this.state.values)
   .then(res =>{
-    console.log("LOGIN",res);
+    // console.log("LOGIN",res);
     localStorage.setItem('token', res.data.payload);
     this.props.history.push('/bubblepage');
   })
